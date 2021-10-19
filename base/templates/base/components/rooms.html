@@ -7,8 +7,11 @@
                 <div class="card-img">
                     <img src="https://source.unsplash.com/random/380x230?sig={{room.id}}" alt="">
                     <span><h4>@{{ room.host.username }}</h4></span>
-                    <label class="edit-post"><a href="{% url 'update-room' room.id %}">Edit</a></label>
-                    <label class="delete-post"><a href="{% url 'delete-room' room.id %}">Delete</a></label>
+                    
+                    {% if request.user.is_authenticated and request.user.id == room.host.id %}
+                        <label class="edit-post"><a href="{% url 'update-room' room.id %}">Edit</a></label>
+                        <label class="delete-post"><a href="{% url 'delete-room' room.id %}">Delete</a></label>
+                    {% endif %}
                 </div>
                 <div class="card-desc">
                     <h3>{{ room.name }} <span class="badge badge-secondary pull-right"><a class="link-light pull-right" href="{% url 'topic' room.topic.id %}">{{ room.topic.name }}</a></span></h3>

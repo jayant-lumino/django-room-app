@@ -1,11 +1,47 @@
 from django.shortcuts import render, redirect
 from .models import Room, Topic
 from .forms import RoomForm, TopicForm
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def loginPage(request):
   context = {}
+  user = {}
+  if request.method == 'POST':
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    # If username is empty
+    if username == '':
+      messages.error(request, 'Please fill the details to login.')
+      return redirect('login')
+
+    # Check if user exists
+    try:
+      user = User.objects.get(username=username)
+    except User.DoesNotExist:
+      messages.error(request, 'User not found with given username.')
+      return redirect('login')
+
+    # Authenticate User if exists
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+      login(request, user)
+      return redirect('home')
+    else:
+      messages.error(request, 'Invalid Credentials.')
+
+
+  context = {'user': user}
   return render(request, 'base/auth/login.html', context)
+
+def logoutPage(request):
+  logout(request)
+  return redirect('home')
 
 def home(request):
   Rooms = Room.objects.all()
@@ -51,6 +87,7 @@ def room(request, id):
 
   return render(request, 'base/room/room.html', context)
 
+@login_required(login_url="login")
 def createRoom(request):
   form = RoomForm()
   if request.method == 'POST':
@@ -62,6 +99,7 @@ def createRoom(request):
   context = {'form': form}
   return render(request, 'base/room/add_edit_form.html', context)
 
+@login_required(login_url="login")
 def updateRoom(request, id):
   room = Room.objects.get(id=id)
   form = RoomForm(instance=room)
@@ -74,6 +112,7 @@ def updateRoom(request, id):
   context = {'form': form}
   return render(request, 'base/room/add_edit_form.html', context)
 
+@login_required(login_url="login")
 def deleteRoom(request, id):
   try:
     room = Room.objects.get(id=id)

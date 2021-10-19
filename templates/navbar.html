@@ -9,8 +9,12 @@
                 <li class="nav-item"><a class="nav-link" href="/topics">Topics</a></li>
                 <li class="nav-item"><a class="nav-link" href="/rooms">Rooms</a></li>
                 <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                <li class="nav-item"><a class="btn btn-secondary mx-2" href="/login">Login</a></li>
-                <li class="nav-item"><a class="btn btn-secondary mx-2" href="/about">Register</a></li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a class="btn btn-secondary mx-2" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="btn btn-secondary mx-2" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="btn btn-secondary mx-2" href="/about">Register</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
