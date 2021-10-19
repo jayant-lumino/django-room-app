@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+
+{% block  content%}
+ <!-- Header-->
+    <header class="bg-primary bg-gradient text-white">
+        <div class="container px-4 text-center">
+            <h1 class="fw-bolder">Create Room</h1>
+        </div>
+    </header>
+    <!-- details card section starts from here -->
+    <section class="container" id="room-cards">
+        <form method="POST" class="form-control" action="">
+            {% csrf_token %}
+            <div class="form-group form-label">
+                <label for="name">Name</label>
+                <input type="text" class="form-control {% if form.name.errors %}is-invalid{% endif %}" name="name" value="{{form.name.value | default_if_none:""}}" id="name" placeholder="Enter Room Name">
+                <small class="text-danger">{{ form.name.errors }}</small>
+            </div>
+            <div class="form-group form-label">
+                <label for="host">{{form.host.label_tag | title}}</label>
+                <select class="form-control {% if form.host.errors %}is-invalid{% endif %}" name="host" id="host">
+                    {% for val in form.host %}
+                        {{val}}
+                    {% endfor %}
+                </select>
+                <small class="text-danger">{{ form.host.errors }}</small>
+            </div>
+            <div class="form-group form-label ">
+                <label for="topic">{{form.topic.label_tag | title}}</label>
+                <select class="form-control {% if form.topic.errors %}is-invalid{% endif %}" name="topic" id="topic">
+                    {% for val in form.topic %}
+                        {{val}}
+                    {% endfor %}
+                </select>
+                <small class="text-danger">{{ form.topic.errors }}</small>
+            </div>
+            <div class="form-group form-label">
+                <label for="description">{{form.description.label_tag | title}}</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{form.description.value | default_if_none:""}}</textarea>
+                <small class="text-danger">{{ form.description.errors }}</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+
+{% endblock content %}

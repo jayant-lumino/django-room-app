@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="modal in" style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {% if obj %}
+                    <div class="modal-header">
+                        <h4 class="modal-title">Are you sure???</h4>
+                    </div>
+                    <div class="modal-body">
+
+                            <p>Are you sure you want to delete ({{obj}})?</p>
+                            <div class="row">
+                                <div class="col-12-xs text-center"style="display: flex;justify-content: space-between;">
+                                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary btn-md">Go Back</a>
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success btn-md">Yes </button>
+                                    </form>
+                                </div>
+                            </div>
+                    {% else %}
+                        <div class="modal-header">
+                            <h4 class="modal-title">No Room Found!!</h4>
+                        </div>
+                        <div class="modal-body">
+                            <a href="{% url 'rooms' %}" class="btn btn-secondary btn-md">< Go Back</a>
+                        </div>
+                    {% endif %}
+
+                </div>
+        
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock content %}

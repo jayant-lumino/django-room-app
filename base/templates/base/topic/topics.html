@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <!-- Header-->
+    <header class="bg-primary bg-gradient text-white">
+        <div class="container px-4 text-center">
+            <h1 class="fw-bolder">Browse Topic</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="col-lg-4 offset-4">
+                    <div class="input-group custom-search-form">
+                    <input type="text" value="{{searchedValue | default_if_none:""}}" name="topic_name" class="form-control">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-warning" type="button">Search</button>
+                    </span>
+                    </div><!-- /input-group -->
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <section class="details-card" id="topic-cards">
+        <div class="container">
+            {% include 'base/components/topics.html' %}
+        </div>
+    </section>
+{% endblock  %}

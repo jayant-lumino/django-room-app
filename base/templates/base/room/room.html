@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- details card section starts from here -->
+    <section class="details-card" id="room-cards">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-content">
+                        <div class="card-img">
+                            <img src="https://source.unsplash.com/random/680x530?sig={{room.id}}" alt="">
+                            <span><h4>@{{ room.host.username }}</h4></span>
+                        </div>
+                        <div class="card-desc">
+                            <h3>{{ room.name }} <span class="badge badge-secondary pull-right"><a class="link-light pull-right" href="{% url 'topic' room.topic.id %}">{{ room.topic.name }}</a></span></h3>
+                            <p>{{ room.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock  %}

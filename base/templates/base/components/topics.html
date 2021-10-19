@@ -1,0 +1,12 @@
+<!-- details card section starts from here -->
+<div class="row">
+    {% for topic in topics %}
+    <div class="col-md-4">
+        <div class="card-content">
+            <div class="card-desc">
+                <h3><a class="link-secondary" href="{% url 'topic' topic.id %}">{{ topic.name }}</a></h3>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

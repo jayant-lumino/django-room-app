@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <!-- Header-->
+    <header class="bg-primary bg-gradient text-white">
+        <div class="container px-4 text-center">
+            <h1 class="fw-bolder">Rooms <a href="{% url 'create-room' %}" class="btn btn-secondary">Create Room</a></h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="col-lg-4 offset-4">
+                    <div class="input-group custom-search-form">
+                    <input type="text" value="{{searchedValue | default_if_none:""}}" placeholder="Search Room" name="room_name" class="form-control">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-warning" type="button">Search</button>
+                    </span>
+                    </div><!-- /input-group -->
+                </div>
+            </form>
+            
+        </div>
+    </header>
+    <section class="details-card" id="rooms-cards">
+        <div class="container">
+            {% include 'base/components/rooms.html' %}
+        </div>
+    </section>
+  
+{% endblock  %}

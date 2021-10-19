@@ -1,0 +1,26 @@
+<!-- details card section starts from here -->
+<div class="row">
+    {% if rooms %}
+        {% for room in rooms %}
+        <div class="col-md-4">
+            <div class="card-content">
+                <div class="card-img">
+                    <img src="https://source.unsplash.com/random/380x230?sig={{room.id}}" alt="">
+                    <span><h4>@{{ room.host.username }}</h4></span>
+                    <label class="edit-post"><a href="{% url 'update-room' room.id %}">Edit</a></label>
+                    <label class="delete-post"><a href="{% url 'delete-room' room.id %}">Delete</a></label>
+                </div>
+                <div class="card-desc">
+                    <h3>{{ room.name }} <span class="badge badge-secondary pull-right"><a class="link-light pull-right" href="{% url 'topic' room.topic.id %}">{{ room.topic.name }}</a></span></h3>
+                    <p>{{ room.description }}</p>
+                    <a href='{% url "room" room.id %}' class="btn-card">Read</a>   
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-md-12">
+            <h3 class="text-center">No Room Exists</h3>
+        </div>
+    {% endif %}
+</div>
