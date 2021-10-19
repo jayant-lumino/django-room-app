@@ -23,14 +23,15 @@
           <input type="password" name="password" class="login__input" placeholder="Password">
         </div>
         <button type="submit" class="button login__submit">
-          <span class="button__text">Log In Now</span>
+          <span class="button__text">Log In</span>
           <i class="button__icon fas fa-chevron-right"></i>
         </button>       
+        <h3 class="my-3"><a class="text-decoration-none text-dark" href="{% url 'home' %}">Back To Site</a></h3>
       </form>
       
       <div class="social-login">
-        <h3><a class="text-decoration-none text-light" href="{% url 'home' %}">Back To Site</a></h3>
-        
+        <small>Haven't Signed Up?</small>
+        <h3><a class="text-decoration-none text-light" href="{% url 'register' %}">Sign Up</a></h3>
       </div>
     </div>
     <div class="screen__background">

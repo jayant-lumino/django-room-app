@@ -1,0 +1,70 @@
+{% extends 'auth.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="register screen">
+    <div class="screen__content">
+      <form class="register" action="" method="POST">
+        {% csrf_token %}
+        {% if messages %}
+          <ul class="messages list-unstyled">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }} text-danger"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+            <div class="login__field">
+                <input type="text" name="username" autocomplete="off" class="login__input col-12" placeholder="User name">
+                {% for error in form.username.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+                {% if form.username.help_text %}
+                    <small class="col-12" style="color: grey">{{ form.username.help_text }}</small>
+                {% endif %}
+            </div>
+          
+            <div class="login__field">
+                <i class="login__icon fas fa-lock"></i>
+                <input type="password" name="password1" autocomplete="off" class="login__input col-12" placeholder="Password">
+                {% for error in form.password1.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+                {% if form.password1.help_text %}
+                    <small class="col-12" style="color: grey">{{ form.password1.help_text }}</small>
+                {% endif %}
+            </div>
+            <div class="login__field">
+                <i class="login__icon fas fa-lock"></i>
+                <input type="password" name="password2" autocomplete="off" class="login__input col-12" placeholder="Confirm Password">
+                {% for error in form.password2.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+                {% if form.password2.help_text %}
+                    <small class="col-12" style="color: grey">{{ form.password2.help_text }}</small>
+                {% endif %}
+            </div> 
+
+        <button type="submit" class="button login__submit">
+          <span class="button__text">Register Now</span>
+          <i class="button__icon fas fa-chevron-right"></i>
+        </button>       
+
+        <h3 class="my-3"><a class="text-decoration-none text-light" href="{% url 'home' %}">Back To Site</a></h3>
+      </form>
+      
+      <div class="social-login">
+        <small>Already Signed Up?</small>
+        <h3><a class="text-decoration-none text-light" href="{% url 'login' %}">Log In</a></h3>
+    </div>
+    
+    </div>
+    <div class="screen__background">
+      <span class="screen__background__shape screen__background__shape4"></span>
+      <span class="screen__background__shape screen__background__shape3"></span>    
+      <span class="screen__background__shape screen__background__shape2"></span>
+      <span class="screen__background__shape screen__background__shape1"></span>
+    </div>    
+  </div>
+</div>
+{% endblock content %}

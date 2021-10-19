@@ -5,8 +5,26 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
+def registerPage(request):
+  form = UserCreationForm()
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save(commit=False)
+      user.username = user.username.lower()
+      user.save()
+
+      login(request, user)
+      return redirect('home')
+    else:
+      messages.error(request, 'An error occured while registering. Please try again')
+
+  context = {'form': form}
+  return render(request, 'base/auth/register.html', context)
+
 def loginPage(request):
   # If user logged in already
   if request.user.is_authenticated:
