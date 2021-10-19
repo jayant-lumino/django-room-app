@@ -8,8 +8,10 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def loginPage(request):
-  context = {}
-  user = {}
+  # If user logged in already
+  if request.user.is_authenticated:
+    return redirect('home')
+
   if request.method == 'POST':
     username = request.POST.get('username')
     password = request.POST.get('password')
@@ -35,9 +37,7 @@ def loginPage(request):
     else:
       messages.error(request, 'Invalid Credentials.')
 
-
-  context = {'user': user}
-  return render(request, 'base/auth/login.html', context)
+  return render(request, 'base/auth/login.html')
 
 def logoutPage(request):
   logout(request)
