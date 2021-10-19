@@ -9,7 +9,7 @@
                 {% csrf_token %}
                 <div class="col-lg-4 offset-4">
                     <div class="input-group custom-search-form">
-                    <input type="text" value="{{searchedValue | default_if_none:""}}" placeholder="Search Room" name="room_name" class="form-control">
+                    <input type="text" value="{{searchedValue | default_if_none:''}}" placeholder="Search Room" name="room_name" class="form-control">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-warning" type="button">Search</button>
                     </span>
