@@ -1,7 +1,7 @@
 # Django-RoomApp
 
 
-This project was done by me as a fresher to learn Django.
+This project was done by me as a learner to learn Django.
 
 <h4>Features:</h4>
 <ol>
