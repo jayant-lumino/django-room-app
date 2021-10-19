@@ -11466,3 +11466,11 @@ a.btn-card {
 a{
   color:#fff;
 }
+
+
+/* Footer */
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
