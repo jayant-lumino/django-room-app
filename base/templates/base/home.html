@@ -4,7 +4,13 @@
     <!-- Header-->
     <header class="bg-primary bg-gradient text-white">
         <div class="container px-4 text-center">
-            <h1 class="fw-bolder">Welcome to Django Intial App</h1>
+            <h1 class="fw-bolder">Welcome 
+                
+                {% if request.user.is_authenticated %}
+                    @{{ request.user }},
+                {% endif %}
+                    
+                to Django Intial App</h1>
             <p class="lead">This is <span class="text-lg badge badge-secondary">Room</span> app build in Django</p>
             <a class="btn btn-lg btn-light" href="#room-cards">Start scrolling!</a>
         </div>
