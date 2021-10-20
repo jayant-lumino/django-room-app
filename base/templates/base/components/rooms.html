@@ -14,8 +14,8 @@
                     {% endif %}
                 </div>
                 <div class="card-desc">
-                    <h3>{{ room.name }} <span class="badge badge-secondary pull-right"><a class="link-light pull-right" href="{% url 'topic' room.topic.id %}">{{ room.topic.name }}</a></span></h3>
-                    <p>{{ room.description }}</p>
+                    <h3>{{ room.name }} <span class="badge badge-secondary pull-right"><a class="link-light text-decoration-none pull-right" style="font-size:0.75rem" href="{% url 'topic' room.topic.id %}">{{ room.topic.name }}</a></span></h3>
+                    <p>{{ room.description | truncatewords:20 }}</p>
                     <a href='{% url "room" room.id %}' class="btn-card">Read</a>   
                 </div>
             </div>

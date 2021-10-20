@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Room, Topic
+from .models import Room, Topic, Message
 from .forms import RoomForm, TopicForm
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -101,9 +101,19 @@ def rooms(request):
 
 def room(request, id):
   room = Room.objects.get(id=id)
-  messages = room.message_set.all()
-  context = {'room': room, 'messages': messages}
+  messages = room.message_set.all().order_by('-created_at')
+  participants = room.participants.all()
 
+  if request.method == 'POST':
+    message = Message.objects.create(
+      user=request.user,
+      room=room,
+      message=request.POST.get('comment')
+    )
+    room.participants.add(request.user)
+    return redirect('room', id=room.id)
+
+  context = {'room': room, 'conversations': messages, 'participants': participants}
   return render(request, 'base/room/room.html', context)
 
 @login_required(login_url="login")
@@ -133,15 +143,34 @@ def updateRoom(request, id):
 
 @login_required(login_url="login")
 def deleteRoom(request, id):
+
   try:
     room = Room.objects.get(id=id)
+    if room.host != request.user:
+      return HttpResponse('You\'re not belongs to this room')
   except Room.DoesNotExist:
     room = None
+
   if (request.method == 'POST'):
     room.delete()
     return redirect('rooms')
   
   return render(request, 'base/room/delete-room.html', {'obj': room})
+
+@login_required(login_url="login")
+def deleteMessage(request, id):
+  try:
+    message = Message.objects.get(id=id)
+    if message.user != request.user:
+      return HttpResponse('You\'re not belongs to this message.')
+  except Message.DoesNotExist:
+      return redirect('room', id=message.room.id)
+
+  if (request.method == 'POST'):
+    message.delete()
+    return redirect('room', id=message.room.id)
+  
+  return render(request, 'base/room/delete-message.html', {'obj': message})
 
 def about(request):
   return render(request, 'about.html')

@@ -5,115 +5,151 @@
 <section class="details-card" id="room-cards">
     <div class="container">
         <div class="row">
-            <h3>{{ room.name }}</h3>
-            <small class="text-muted">Hosted By</small>
-            <div class="comment d-flex mb-4">
-                <div class="flex-shrink-0">
-                    <div class="avatar avatar-sm rounded-circle">
-                        <img class="avatar-img" src="https://uifaces.co/our-content/donated/AW-rdWlG.jpg"
-                            alt="">
-                    </div>
+            <div class="col-lg-9 col-xs-12">
+                <div class="card-header">
+                    ROOM
                 </div>
-                <div class="flex-grow-1 ms-2 ms-sm-3">
-                    <div class="comment-meta d-flex align-items-baseline">
-                        <h6 class="me-2">{{room.host.username}}</h6>
-                        <span class="text-muted">{{room.created_at}}</span>
-                    </div>
-                    <div class="comment-body">
-                        {{room.description}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="row card-content p-3 justify-content-center my-4">
-            <div class="col-lg-12 mb-4">
-                <h5>{{ messages|length }} Comments</h5>
-            </div>
-            {% for message in messages %}
-            <div class="row justify-content-center mb-4">
-                <div class="col-12">
-                    <div class="comments">
-                        <div class="comment d-flex mb-4">
-                            <div class="flex-shrink-0">
-                                <div class="avatar avatar-sm rounded-circle">
-                                    <img class="avatar-img" src="https://uifaces.co/our-content/donated/AW-rdWlG.jpg"
-                                        alt="">
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 ms-2 ms-sm-3">
-                                <div class="comment-meta d-flex align-items-baseline">
-                                    <h6 class="me-2">{{message.user.username}}</h6>
-                                    <span class="text-muted">{{message.created_at}}</span>
-                                </div>
-                                <div class="comment-body">
-                                    {{message.message}}
-                                </div>
-                                <!-- <div class="comment-replies bg-light p-3 mt-3 rounded">
-                                    <h6 class="comment-replies-title mb-4 text-muted text-uppercase">2 replies</h6>
-
-                                    <div class="reply d-flex mb-4">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar avatar-sm rounded-circle">
-                                                <img class="avatar-img"
-                                                    src="https://images.unsplash.com/photo-1501325087108-ae3ee3fad52f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=f7f448c2a70154ef85786cf3e4581e4b"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1 ms-2 ms-sm-3">
-                                            <div class="reply-meta d-flex align-items-baseline">
-                                                <h6 class="mb-0 me-2">Brandon Smith</h6>
-                                                <span class="text-muted">2d</span>
-                                            </div>
-                                            <div class="reply-body">
-                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="reply d-flex">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar avatar-sm rounded-circle">
-                                                <img class="avatar-img"
-                                                    src="https://uifaces.co/our-content/donated/6f6p85he.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1 ms-2 ms-sm-3">
-                                            <div class="reply-meta d-flex align-items-baseline">
-                                                <h6 class="mb-0 me-2">James Parsons</h6>
-                                                <span class="text-muted">1d</span>
-                                            </div>
-                                            <div class="reply-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio
-                                                dolore sed eos sapiente, praesentium.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="comment-form d-flex align-items-center">
+                <div class="card-content shadow-none  px-4 py-4">
+                    <h3>{{ room.name }}</h3>
+                    <small class="text-muted">Hosted By</small>
+                    <div class="comment d-flex mb-4">
                         <div class="flex-shrink-0">
                             <div class="avatar avatar-sm rounded-circle">
-                                <img class="avatar-img"
-                                    src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
+                                <img class="avatar-img" src="https://uifaces.co/our-content/donated/AW-rdWlG.jpg"
                                     alt="">
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-2 ms-sm-3">
-                            <form>
-                                <textarea class="form-control py-0 px-1 border-0" rows="1"
-                                    placeholder="Start writing..." style="resize: none;"></textarea>
-                            </form>
+                            <div class="comment-meta d-flex align-items-baseline">
+                                <h6 class="me-2">{{room.host.username}}</h6>
+                                <span class="text-muted">{{room.created_at | timesince}}</span>
+                            </div>
+                            <div class="comment-body">
+                                {{room.description}}
+                            </div>
+                            <h2 class="badge badge-secondary">{{ room.topic.name }}</h2>
                         </div>
+                    </div>
+
+                    <!-- Conversation -->
+                    <div class="p-3 justify-content-center comment-container px-5 mark mt-4">
+                        <div class="col-lg-12 mb-4">
+                            <h5>{{ conversations|length }} Comments</h5>
+                        </div>
+                        {% for conversation in conversations %}
+                        <div class="row justify-content-center mb-4">
+                            <div class="col-12">
+                                <div class="comments">
+                                    <div class="comment d-flex mb-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar avatar-sm rounded-circle">
+                                                <img class="avatar-img" src="https://uifaces.co/our-content/donated/AW-rdWlG.jpg"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2 ms-sm-3">
+                                            <div class="comment-meta d-flex align-items-baseline justify-content-between">
+                                                <h6 class="me-2">{{conversation.user.username}}                                     
+                                                    <span class="text-muted">{{conversation.created_at | timesince}}</span>
+                                                </h6>
+                                                {% if request.user.is_authenticated and conversation.user.id == request.user.id %}
+                                                    <span>
+
+                                                        <a href="#" class="text-muted text-decoration-none text-right" >Edit</a>
+                                                        <label class="text-muted">|</label>
+                                                        <a href="{% url 'delete-message' conversation.id %}" class="text-muted text-danger text-decoration-none text-right" >Delete</a>
+                                                    </span>
+                                                {% endif %}
+                                                    
+                                            </div>
+                                            <div class="comment-body">
+                                                {{conversation.message}}
+                                            </div>
+        
+                                            <!-- Conversation Reply Container -->
+                                            <!-- <div class="comment-replies bg-light p-3 mt-3 rounded">
+                                                <h6 class="comment-replies-title mb-4 text-muted text-uppercase">2 replies</h6>
+        
+                                                <div class="reply d-flex mb-4">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar avatar-sm rounded-circle">
+                                                            <img class="avatar-img"
+                                                                src="https://images.unsplash.com/photo-1501325087108-ae3ee3fad52f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=f7f448c2a70154ef85786cf3e4581e4b"
+                                                                alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2 ms-sm-3">
+                                                        <div class="reply-meta d-flex align-items-baseline">
+                                                            <h6 class="mb-0 me-2">Brandon Smith</h6>
+                                                            <span class="text-muted">2d</span>
+                                                        </div>
+                                                        <div class="reply-body">
+                                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="reply d-flex">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="avatar avatar-sm rounded-circle">
+                                                            <img class="avatar-img"
+                                                                src="https://uifaces.co/our-content/donated/6f6p85he.jpg" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2 ms-sm-3">
+                                                        <div class="reply-meta d-flex align-items-baseline">
+                                                            <h6 class="mb-0 me-2">James Parsons</h6>
+                                                            <span class="text-muted">1d</span>
+                                                        </div>
+                                                        <div class="reply-body">
+                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio
+                                                            dolore sed eos sapiente, praesentium.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        {% if request.user.is_authenticated %}
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="comment-form d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar avatar-sm rounded-circle">
+                                                <img class="avatar-img" title="{{request.user}}" alt="{{request.user}}"
+                                                    src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-2 ms-sm-3">
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                <textarea class="form-control py-0 px-1 border-1" rows="3"
+                                                    placeholder="Start writing..." name="comment" style="resize: none;"></textarea>
+                                                <button type="submit" class="btn btn-secondary my-2 pull-right">Post Comment</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-xs-12">
+                <div class="card-header">
+                    Participants
+                </div>
+                <div class="card-content shadow-none  px-4 py-4">
+                    {% include 'base/components/participants.html' %}
+                </div>
+            </div>
         </div>
+        <div class="clearfix"></div>
+    </div>
 </section>
 {% endblock %}
