@@ -10,21 +10,13 @@
                 </div>
                 <div class="flex-grow-1 text-light ms-2 ms-sm-3">
                     <div class="comment-meta d-flex align-items-baseline justify-content-between">
-                        <h6 class="me-2">{{conversation.user.username}}                                     
-                            <span class="text-muted">{{conversation.created_at | timesince}}</span>
+                        <h6 class="me-2">{{room.topic}} |                                 
+                            <span class="text-muted">Posted: {{room.created_at | timesince}} ago</span>
                         </h6>
-                        {% if request.user.is_authenticated and conversation.user.id == request.user.id %}
-                            <span>
-
-                                <a href="#" class="text-muted text-decoration-none text-right" >Edit</a>
-                                <label class="text-muted">|</label>
-                                <a href="{% url 'delete-message' conversation.id %}" class="text-muted text-danger text-decoration-none text-right" >Delete</a>
-                            </span>
-                        {% endif %}
-                            
+                        
                     </div>
                     <div class="comment-body">
-                        {{conversation.message}}
+                        {{room.description|slice:"0:200"}}{% if room.description|length > 200 %}...{% endif %}
                     </div>
 
                 </div>
