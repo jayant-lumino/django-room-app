@@ -1,0 +1,10 @@
+
+{% for topic in topics  %}
+<a  href="{% url 'topic' topic.id %}" class="text-dark text-decoration-none">
+    <div class="post-about mb-4">
+      <h4>{{ topic.name }}</h4>
+    </div>
+</a>
+    
+{% endfor %}
+    

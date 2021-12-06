@@ -64,8 +64,9 @@ def logoutPage(request):
 def home(request):
   Rooms = Room.objects.all()
   topics = Topic.objects.all()
+  activities = Message.objects.all()
 
-  context = {'rooms': Rooms, 'topics': topics}
+  context = {'rooms': Rooms, 'topics': topics, 'activities': activities}
   return render(request, 'base/home.html', context)
 
 def topics(request):

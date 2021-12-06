@@ -16,20 +16,34 @@
         </div>
     </header>
     
-    <!-- Topics Section -->
-    <section class="details-card" id="topic-cards">
-        <div class="container">
-            <h1>Topics <a href="{% url 'topics' %}" class="pull-right text-xs text-secondary text-decoration-none text-muted"><small style="font-size: 20px">View All</small></a></h1>
-            {% include 'base/components/topics.html' %}
-        </div>
-    </section>
+    <div class="d-grid container-fluid" style="grid-template-columns: 1fr 3fr 1fr;">
+        <!-- Topics Section -->
+        <section class="details-card" id="topic-cards">
+            <div class="container">
+                <h1>Topics</h1>
+                <hr>
+                {% include 'base/components/topics/topic-list.html' %}
+            </div>
+        </section>
+         <!-- Rooms Section -->
+        <section class="details-card" id="room-cards">
+            <div class="container">
+                <h1>Rooms</h1>
+                <hr>
+                {% include 'base/components/rooms/room-list.html' %}
+            </div>
+        </section>
+         <!-- Activities Section -->
+        <section class="details-card" id="activities-cards">
+            <div class="container">
+                <h1>Recent Activities</h1>
+                <hr>
+                {% include 'base/components/activities.html' %}
+            </div>
+        </section>
+    </div>
+    
 
-    <!-- Rooms Section -->
-    <section class="details-card" id="room-cards">
-        <div class="container">
-            <h1>Rooms</h1>
-            {% include 'base/components/rooms.html' %}
-        </div>
-    </section>
+   
     
 {% endblock  %}

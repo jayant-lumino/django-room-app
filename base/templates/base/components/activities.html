@@ -1,0 +1,23 @@
+<!-- This will show the list of the user with minimal details, Like Profile pic, username and Full name -->
+
+{% for activity in activities  %}
+    
+    <div class="row justify-content-center mb-2">
+        <div class="col-12">
+            <div class="d-flex">
+                <div class="flex-shrink-0">
+                    <div class="avatar avatar-sm rounded-circle">
+                        <img class="avatar-img" src="https://uifaces.co/our-content/donated/AW-rdWlG.jpg"
+                            alt="">
+                    </div>
+                </div>
+                <div class="flex-grow-1 ms-2 ms-sm-3">
+                    <div class="comment-meta d-flex align-items-baseline justify-content-between">
+                        <h6 class="me-2">@{{activity.user.username}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
